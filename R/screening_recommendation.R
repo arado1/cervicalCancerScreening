@@ -8,6 +8,7 @@
 #' @param hpv_result HPV test result (e.g., 'Positive', 'Negative').
 #' @param genotype HPV genotype (e.g., '16', '18', 'Other').
 #' @param history Medical history (e.g., 'None', 'CIN2', 'CIN3', 'Prior hysterectomy').
+#' @param hysterectomy Whether the woman has had a hysterectomy (default is FALSE).
 #' 
 #' @return A list containing the screening recommendation and its grade.
 #' 
@@ -15,10 +16,17 @@
 #' screening_recommendation(age = 28, cytology_result = 'Normal', hpv_result = 'Negative', genotype = 'None', history = 'None')
 #' 
 #' @export
-screening_recommendation <- function(age, cytology_result, hpv_result, genotype, history) {
+screening_recommendation <- function(age, cytology_result, hpv_result, genotype, history, hysterectomy = FALSE) {
   # Define recommendation
   recommendation <- ''
   grade <- ''
+  
+  # Logic for women with hysterectomy
+  if (hysterectomy) {
+    recommendation <- 'No screening needed (hysterectomy with cervix removed).'
+    grade <- 'D'
+    return(list(recommendation = recommendation, grade = grade))
+  }
   
   # Logic for women younger than 21
   if (age < 21) {

@@ -7,11 +7,18 @@ create_package("C:/Users/Amir Rad/Documents/Cervical Cancer Screening")
 
 # Then, inside the package directory, create the R functions.
 # Function to check cervical cancer screening recommendations
-screening_recommendation <- function(age, cytology_result, hpv_result, genotype, history) {
+screening_recommendation <- function(age, cytology_result, hpv_result, genotype, history, hysterectomy = FALSE) {
   
   # Define the recommendations
   recommendation <- ""
   grade <- ""
+  
+  # Logic for women with hysterectomy
+  if (hysterectomy) {
+    recommendation <- "No screening needed (hysterectomy with cervix removed)."
+    grade <- "D"
+    return(list(recommendation = recommendation, grade = grade))
+  }
   
   # Logic for women younger than 21
   if (age < 21) {
@@ -126,6 +133,7 @@ function_content <- "
 #' @param hpv_result HPV test result (e.g., 'Positive', 'Negative').
 #' @param genotype HPV genotype (e.g., '16', '18', 'Other').
 #' @param history Medical history (e.g., 'None', 'CIN2', 'CIN3', 'Prior hysterectomy').
+#' @param hysterectomy Whether the woman has had a hysterectomy (default is FALSE).
 #' 
 #' @return A list containing the screening recommendation and its grade.
 #' 
@@ -133,10 +141,17 @@ function_content <- "
 #' screening_recommendation(age = 28, cytology_result = 'Normal', hpv_result = 'Negative', genotype = 'None', history = 'None')
 #' 
 #' @export
-screening_recommendation <- function(age, cytology_result, hpv_result, genotype, history) {
+screening_recommendation <- function(age, cytology_result, hpv_result, genotype, history, hysterectomy = FALSE) {
   # Define recommendation
   recommendation <- ''
   grade <- ''
+  
+  # Logic for women with hysterectomy
+  if (hysterectomy) {
+    recommendation <- 'No screening needed (hysterectomy with cervix removed).'
+    grade <- 'D'
+    return(list(recommendation = recommendation, grade = grade))
+  }
   
   # Logic for women younger than 21
   if (age < 21) {
@@ -199,8 +214,6 @@ screening_recommendation <- function(age, cytology_result, hpv_result, genotype,
 # Save the function in the R folder
 writeLines(function_content, "C:/Users/Amir Rad/Documents/Cervical Cancer Screening/R/screening_recommendation.R")
 
-# Install devtools if you haven't already
-install.packages("devtools")
 
 # Load the devtools package
 library(devtools)
@@ -217,6 +230,3 @@ result <- screening_recommendation(age = 28, cytology_result = "Normal", hpv_res
 
 print(result$recommendation)  # "Screening every 3 years with cytology"
 print(result$grade)          # "A"
-
-
-

@@ -4,7 +4,14 @@
 \alias{screening_recommendation}
 \title{Cervical Cancer Screening Recommendation}
 \usage{
-screening_recommendation(age, cytology_result, hpv_result, genotype, history)
+screening_recommendation(
+  age,
+  cytology_result,
+  hpv_result,
+  genotype,
+  history,
+  hysterectomy = FALSE
+)
 }
 \arguments{
 \item{age}{Age of the woman.}
@@ -16,6 +23,8 @@ screening_recommendation(age, cytology_result, hpv_result, genotype, history)
 \item{genotype}{HPV genotype (e.g., '16', '18', 'Other').}
 
 \item{history}{Medical history (e.g., 'None', 'CIN2', 'CIN3', 'Prior hysterectomy').}
+
+\item{hysterectomy}{Whether the woman has had a hysterectomy (default is FALSE).}
 }
 \value{
 A list containing the screening recommendation and its grade.
