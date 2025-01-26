@@ -1,0 +1,13 @@
+Package: cervicalCancerScreening
+Type: Package
+Title: An R package for cervical cancer screening recommendations
+Version: 0.1.0
+Author: Amir Rad
+Maintainer: Amir Rad <your.email@example.com>
+Description: This package helps in providing cervical cancer screening recommendations based on test results and medical history, following the Norwegian guidelines.
+License: What license it uses
+Encoding: UTF-8
+LazyData: true
+Depends:
+  R (>= 4.0)
+RoxygenNote: 7.3.2
